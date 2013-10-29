@@ -1,0 +1,71 @@
+- if @profile.errors.any?
+  .error-messages
+    %h2 Uh-oh...
+    %ul
+      - @profile.errors.full_messages.each do |message|
+        %li= message
+
+/ = f.text_field :avatar # need to set up upload      
+/ .field
+/   = f.label :remote_avatar_url, 'or add by URL'
+/   = f.url_field :remote_avatar_url   
+
+= form_for(@profile, html: {class: 'standard-form'}) do |f|
+  %fieldset
+    %legend About
+    .field
+      = image_tag @profile.avatar_url(:thumb) if @profile.avatar?    
+      = f.label :avatar
+      = f.file_field :avatar
+      %br/ 
+    .field
+      = f.label :location
+      = f.text_field :location
+      %br/
+    .field
+      = f.label :bio
+      = f.text_area :bio
+      %br/
+    .field
+      = f.label :twitter, 'Twitter username'
+      = f.text_field :twitter
+      %br/    
+    .field
+      = f.label :facebook, 'Facebook username'
+      = f.text_field :facebook
+      %br/
+    .field
+      = f.label :website
+      = f.url_field :website
+      %br/
+      %br/
+    %legend Look and Feel
+    .field
+      = f.label :font_face_primary, 'Primary font face'
+      = f.text_field :font_face_primary # maybe offer a list of options instead?
+      %br/
+    .field
+      = f.label :font_face_secondary, 'Secondary font face'
+      = f.text_field :font_face_secondary # maybe offer a list of options instead?
+      %br/      
+    .field
+      = f.label :font_color_primary, 'Primary font color in hex'
+      = link_to "(Need help?)", 'http://www.html-color-codes.com', target: '_blank'
+      = f.text_field :font_color_primary
+      %br/
+    .field
+      = f.label :font_color_secondary, 'Secondary font color in hex'
+      = link_to "(Need help?)", 'http://www.html-color-codes.com', target: '_blank'
+      = f.text_field :font_color_secondary
+      %br/            
+    .field
+      = f.label :link_color, 'Link color in hex'
+      = f.text_field :link_color
+      %br/
+    .field
+      = f.label :background_image
+      = f.text_field :background_image # need to set up upload
+      %br/      
+      %br/
+    .actions
+      = f.submit

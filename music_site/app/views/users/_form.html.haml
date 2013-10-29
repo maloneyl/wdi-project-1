@@ -1,0 +1,40 @@
+- if @user.errors.any?
+  .error-messages
+    %h2 Uh-oh...
+    %ul
+      - @user.errors.full_messages.each do |message|
+        %li= message
+
+= form_for(@user, html: {class: 'standard-form'}) do |f|
+  %fieldset
+    %legend Basic Info
+    .field
+      = f.label :name
+      = f.text_field :name
+      %br/    
+    .field
+      = f.label :email
+      = f.text_field :email
+      %br/
+    .field
+      = f.label :password
+      = f.password_field :password
+      %br/
+    .field
+      = f.label :password_confirmation
+      = f.password_field :password_confirmation
+      %br/
+      %br/
+    %legend Your Music Site Account
+    .field
+      = f.label :handle, 'Username'
+      = f.text_field :handle    
+    .field
+      = f.label :user_type, 'I am a'
+      - ['musician', 'listener'].each do |type|
+        = f.radio_button :user_type, type, checked: @user.user_type == type
+        = f.label "user_type_#{type}", type, class: 'checkbox-label'
+      %br/
+      %br/
+    .actions
+      = f.submit

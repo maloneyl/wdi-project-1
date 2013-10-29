@@ -1,0 +1,48 @@
+/ Add in-line CSS for custom layouts?
+/ Look into how to structure profile page
+
+%h2{ style: "font-family: #{@user.profile.font_face_primary}; color: ##{@user.profile.font_color_primary}" }
+  = "#{@user.name} (#{@user.handle})"
+= image_tag @user.profile.avatar_url(:thumb) if @user.profile.avatar?    
+%h5{ style: "font-family: #{@user.profile.font_face_primary}; color: ##{@user.profile.font_color_primary}" }
+  Location
+%p{ style: "font-family: #{@user.profile.font_face_secondary}; color: ##{@user.profile.font_color_secondary}" }
+  = @user.profile.location
+
+%h5{ style: "font-family: #{@user.profile.font_face_primary}; color: ##{@user.profile.font_color_primary}" }
+  Blurb  
+%p{ style: "font-family: #{@user.profile.font_face_secondary}; color: ##{@user.profile.font_color_secondary}" }
+  = @user.profile.bio
+
+%h5{ style: "font-family: #{@user.profile.font_face_primary}; color: ##{@user.profile.font_color_primary}" }
+  Links
+%p{ style: "font-family: #{@user.profile.font_face_secondary}; color: ##{@user.profile.font_color_secondary}" }  
+  = link_to 'Twitter', "http://wwww.twitter.com/#{@user.profile.twitter}" 
+  = link_to 'Facebook', "http://wwww.facebook.com/#{@user.profile.facebook}" 
+  = link_to 'Website', @user.profile.website
+
+/ %br/
+/ = @user.location
+
+%p
+/   About
+/   %br/
+/   = @user.bio
+
+%audio{controls: ""}
+  %source{src: "horse.mp3", type: "audio/mpeg"}
+    %source{src: "horse.ogg", type: "audio/ogg"}
+      %embed{height: "50", src: "horse.mp3", width: "100"}
+
+
+
+/ http://www.w3schools.com/html/html_sounds.asp
+/ HTML Audio - The Best Solution
+/ The best solution is to use the HTML5 <audio> element + the <embed> element.
+/ The example below uses the <audio> element and tries to play the audio either as MP3 or OGG. If that fails, the code "falls back" to try the <embed> element:
+/ Example
+/ <audio controls>
+/   <source src="horse.mp3" type="audio/mpeg">
+/   <source src="horse.ogg" type="audio/ogg">
+/   <embed height="50" width="100" src="horse.mp3">
+/ </audio>
