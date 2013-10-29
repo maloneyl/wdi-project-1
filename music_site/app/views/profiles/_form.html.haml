@@ -5,17 +5,12 @@
       - @profile.errors.full_messages.each do |message|
         %li= message
 
-/ = f.text_field :avatar # need to set up upload      
-/ .field
-/   = f.label :remote_avatar_url, 'or add by URL'
-/   = f.url_field :remote_avatar_url   
-
 = form_for(@profile, html: {class: 'standard-form'}) do |f|
   %fieldset
     %legend About
     .field
-      = image_tag @profile.avatar_url(:thumb) if @profile.avatar?    
       = f.label :avatar
+      = image_tag @profile.avatar_url(:thumb) if @profile.avatar?      
       = f.file_field :avatar
       %br/ 
     .field
@@ -63,7 +58,7 @@
       = f.text_field :link_color
       %br/
     .field
-      = f.label :background_image
+      = f.label :background_image # will see how layout goes... could do header image + background color instead?
       = f.text_field :background_image # need to set up upload
       %br/      
       %br/

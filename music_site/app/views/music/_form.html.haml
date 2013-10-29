@@ -1,0 +1,30 @@
+- if @music.errors.any?
+  .error-messages
+    %h2 Uh-oh...
+    %ul
+      - @music.errors.full_messages.each do |message|
+        %li= message
+
+= form_for(@music, html: {class: 'standard-form'}) do |f|
+  %fieldset
+    %legend Track Details
+    .field
+      = f.label :title
+      = f.text_field :title
+      %br/ 
+    .field
+      = f.label :track, 'File (MP3 or AAC)'
+      = f.file_field :track
+      %br/ 
+    .field
+      = f.label :art, 'Cover Art'
+      = image_tag @music.art_url(:thumb) if @music.art?      
+      = f.file_field :art
+      %br/ 
+    .field
+      = f.label :genre
+      = f.text_field :genre
+      %br/   
+      %br/
+    .actions
+      = f.submit

@@ -19,6 +19,10 @@
             - if current_user
               Logged in as #{current_user.name}
               |
+              = link_to 'Edit Account', edit_user_path(current_user)
+              |
+              = link_to 'Edit Profile', edit_profile_path(current_user.profile.id) if current_user.profile.present?
+              |
               = link_to 'Log Out', logout_path, method: :delete
             -else
               = link_to "Log In", login_path
@@ -26,7 +30,13 @@
               = link_to "Sign Up", signup_path
         .clear
 
-      / - flash.each do |name, msg|
-      /   = content_tag :div, msg, :id => "flash_#{name}"
+      - flash.each do |name, msg|
+        = content_tag :div, msg, :id => "flash_#{name}"
 
       = yield
+
+      %p
+
+  %footer
+    %small
+      This website is a non-commercial student project. No copyright infringement intended.

@@ -13,6 +13,8 @@ MusicSite::Application.routes.draw do
   #           PUT    /users/:id(.:format)      users#update
   #           DELETE /users/:id(.:format)      users#destroy
 
+  resources :music
+
   resources :sessions, only: [:new, :create, :destroy]
 
   get "/signup", to: "users#new", as: "signup"

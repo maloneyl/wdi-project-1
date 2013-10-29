@@ -1,6 +1,8 @@
 / Add in-line CSS for custom layouts?
 / Look into how to structure profile page
 
+/ * BASIC PROFILE STUFF
+
 %h2{ style: "font-family: #{@user.profile.font_face_primary}; color: ##{@user.profile.font_color_primary}" }
   = "#{@user.name} (#{@user.handle})"
 = image_tag @user.profile.avatar_url(:thumb) if @user.profile.avatar?    
@@ -21,21 +23,25 @@
   = link_to 'Facebook', "http://wwww.facebook.com/#{@user.profile.facebook}" 
   = link_to 'Website', @user.profile.website
 
-/ %br/
-/ = @user.location
 
-%p
-/   About
-/   %br/
-/   = @user.bio
+/ * MUSIC STUFF
 
-%audio{controls: ""}
-  %source{src: "horse.mp3", type: "audio/mpeg"}
-    %source{src: "horse.ogg", type: "audio/ogg"}
-      %embed{height: "50", src: "horse.mp3", width: "100"}
+%h3{ style: "font-family: #{@user.profile.font_face_primary}; color: ##{@user.profile.font_color_primary}" }
+  Music
+%p{ style: "font-family: #{@user.profile.font_face_secondary}; color: ##{@user.profile.font_color_secondary}" }
+  - @user.music.each do |song|  
+    = song.title
+    %br/
+    = song.genre
+    %br/
+    = image_tag song.art, width: 150
+    %br/  
+    %audio{controls: ""}
+      %source{src: "#{song.track}", type: "audio/mpeg"}
+      %embed{height: "50", src: "#{song.track}", width: "100"}
 
 
-
+/ REFERENCE:
 / http://www.w3schools.com/html/html_sounds.asp
 / HTML Audio - The Best Solution
 / The best solution is to use the HTML5 <audio> element + the <embed> element.

@@ -30,7 +30,7 @@
       = f.label :handle, 'Username'
       = f.text_field :handle    
     .field
-      = f.label :user_type, 'I am a'
+      = f.label :user_type, 'I am a '
       - ['musician', 'listener'].each do |type|
         = f.radio_button :user_type, type, checked: @user.user_type == type
         = f.label "user_type_#{type}", type, class: 'checkbox-label'
