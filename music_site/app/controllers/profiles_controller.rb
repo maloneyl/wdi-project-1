@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
 
-  # load_and_authorize_resource
+  load_and_authorize_resource
 
   def index
   end
@@ -15,22 +15,22 @@ class ProfilesController < ApplicationController
     if @user.profile.nil?
       @profile = Profile.new
     else
-      redirect_to user_path(@user), notice: 'You already have a profile! Edit profile instead...'
+      redirect_to user_path(@user), notice: 'You already have a profile! Check this out...'
     end
   end
 
   def create
     @profile = Profile.new(params[:profile])
-    @profile.user_id = current_user.id
+    @profile.user_id = @current_user.id
     if @profile.save
-      redirect_to user_path(current_user), notice: 'Profile saved!'
+      redirect_to user_path(@current_user), notice: 'Profile saved!'
     else
       render :new
     end
   end
 
   def edit
-    @profile = Profile.find_by_user_id(current_user.id)
+    @profile = Profile.find_by_user_id(@current_user.id)
   end
 
   def update
@@ -44,6 +44,9 @@ class ProfilesController < ApplicationController
   end
 
   def destroy
+    @profile = Profile.find(params[:id])
+    @profile.destroy
+    redirect_to user_path(@current_user), notice: 'Profile removed!'
   end
 
 end

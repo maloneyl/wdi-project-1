@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  # load_and_authorize_resource
+  load_and_authorize_resource
 
   def index
   end
@@ -10,7 +10,12 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user = User.new
+    if current_user
+      redirect_to user_path(current_user), notice: "You already have an account! Check this out..."
+      return
+    else
+      @user = User.new
+    end
   end
 
   def create
@@ -35,12 +40,12 @@ class UsersController < ApplicationController
       flash.now[:alert] = 'User was NOT updated!'
       render :edit
     end
-  end  
+  end
 
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    redirect_to root_url    
+    redirect_to root_url
   end
 
 end

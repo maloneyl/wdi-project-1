@@ -1,3 +1,13 @@
-%h2 Edit Your Profile
+- if can? :update, @profile
 
-= render 'form'
+  %hr/
+
+  %h2 Edit Profile
+
+  = render 'form'
+
+  %p
+
+  = link_to 'Remove Profile', @profile, method: :delete, confirm: "Are you sure you'd like to remove your profile? There's no undo!"
+
+  %hr/

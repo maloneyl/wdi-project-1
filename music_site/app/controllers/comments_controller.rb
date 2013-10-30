@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
 
+load_and_authorize_resource
+
 # reminder: comments is nested within music! need to pass both params!
 #     music_comments GET    /music/:music_id/comments(.:format)          comments#index
 #                    POST   /music/:music_id/comments(.:format)          comments#create
@@ -16,6 +18,7 @@ class CommentsController < ApplicationController
       return
     else
       comment = Comment.new(params[:comment])
+      comment.music_id = music_id
       comment.user_id = current_user.id
       comment.save
       redirect_to music_path(music_id), notice: 'Comment posted!'

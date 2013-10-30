@@ -6,9 +6,9 @@ class Music < ActiveRecord::Base
   validates :title, presence: true
 
   belongs_to :user
-  has_many :comments
+  has_many :comments, dependent: :destroy
 
-  mount_uploader :art, ArtUploader  
+  mount_uploader :art, ArtUploader
   mount_uploader :track, TrackUploader
 
 end

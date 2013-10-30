@@ -10,21 +10,25 @@
     %legend Track Details
     .field
       = f.label :title
+      %br/
       = f.text_field :title
-      %br/ 
+      %br/
     .field
       = f.label :track, 'File (MP3 or AAC)'
+      %br/
       = f.file_field :track
-      %br/ 
+      %br/
     .field
       = f.label :art, 'Cover Art'
-      = image_tag @music.art_url(:thumb) if @music.art?      
+      %br/
+      = image_tag @music.art_url(:thumb) if @music.art?
       = f.file_field :art
-      %br/ 
+      %br/
     .field
       = f.label :genre
+      %br/
       = f.text_field :genre
-      %br/   
+      %br/
       %br/
     .actions
       = f.submit

@@ -11,7 +11,7 @@
     .field
       = f.label :name
       = f.text_field :name
-      %br/    
+      %br/
     .field
       = f.label :email
       = f.text_field :email
@@ -27,13 +27,13 @@
       %br/
     %legend Your Music Site Account
     .field
-      = f.label :handle, 'Username'
-      = f.text_field :handle    
+      = f.label :username, 'Username'
+      = f.text_field :username
     .field
-      = f.label :user_type, 'I am a '
+      = f.label :role, 'I am a '
       - ['musician', 'listener'].each do |type|
-        = f.radio_button :user_type, type, checked: @user.user_type == type
-        = f.label "user_type_#{type}", type, class: 'checkbox-label'
+        = f.radio_button :role, type, checked: @user.role == type
+        = f.label "role_#{type}", type, class: 'checkbox-label'
       %br/
       %br/
     .actions

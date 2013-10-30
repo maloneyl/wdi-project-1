@@ -10,7 +10,7 @@ gem 'pg'
 gem 'haml-rails'
 
 # Authentication
-gem 'bcrypt-ruby', '~> 3.0.0' 
+gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Authorization
 gem 'cancan'
@@ -34,7 +34,7 @@ end
 
 gem 'jquery-rails'
 
-group :development, :test do 
+group :development, :test do
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'better_errors'

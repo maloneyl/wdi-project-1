@@ -1,3 +1,9 @@
-%h2 Add a Track
+- if can? :create, Music
 
-= render 'form'
+  %hr/
+
+  %h2 Add Music
+
+  = render 'form'
+
+  %hr/

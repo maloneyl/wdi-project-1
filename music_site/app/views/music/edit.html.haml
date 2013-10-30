@@ -1,0 +1,13 @@
+- if can? :update, @music
+
+  %hr/
+
+  %h2 Edit Track
+
+  = render 'form'
+
+  %p
+
+  = link_to 'Remove Track', @music, method: :delete, confirm: "Are you sure you'd like to remove #{@music.title}? There's no undo!"
+
+  %hr/
