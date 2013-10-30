@@ -1,54 +1,55 @@
 / Add in-line CSS for custom layouts?
 / Look into how to structure profile page
 
+%hr/
 / * BASIC PROFILE STUFF
 
 %h2{ style: "font-family: #{@user.profile.font_face_primary}; color: ##{@user.profile.font_color_primary}" }
   = "#{@user.name} (#{@user.handle})"
-= image_tag @user.profile.avatar_url(:thumb) if @user.profile.avatar?    
+= image_tag @user.profile.avatar_url(:thumb) if @user.profile.avatar?
 %h5{ style: "font-family: #{@user.profile.font_face_primary}; color: ##{@user.profile.font_color_primary}" }
   Location
 %p{ style: "font-family: #{@user.profile.font_face_secondary}; color: ##{@user.profile.font_color_secondary}" }
   = @user.profile.location
 
 %h5{ style: "font-family: #{@user.profile.font_face_primary}; color: ##{@user.profile.font_color_primary}" }
-  Blurb  
+  Blurb
 %p{ style: "font-family: #{@user.profile.font_face_secondary}; color: ##{@user.profile.font_color_secondary}" }
   = @user.profile.bio
 
 %h5{ style: "font-family: #{@user.profile.font_face_primary}; color: ##{@user.profile.font_color_primary}" }
   Links
-%p{ style: "font-family: #{@user.profile.font_face_secondary}; color: ##{@user.profile.font_color_secondary}" }  
-  = link_to 'Twitter', "http://wwww.twitter.com/#{@user.profile.twitter}" 
-  = link_to 'Facebook', "http://wwww.facebook.com/#{@user.profile.facebook}" 
+%p{ style: "font-family: #{@user.profile.font_face_secondary}; color: ##{@user.profile.font_color_secondary}" }
+  = link_to 'Twitter', "http://wwww.twitter.com/#{@user.profile.twitter}"
+  = link_to 'Facebook', "http://wwww.facebook.com/#{@user.profile.facebook}"
   = link_to 'Website', @user.profile.website
 
+%hr/
 
 / * MUSIC STUFF
 
 %h3{ style: "font-family: #{@user.profile.font_face_primary}; color: ##{@user.profile.font_color_primary}" }
   Music
 %p{ style: "font-family: #{@user.profile.font_face_secondary}; color: ##{@user.profile.font_color_secondary}" }
-  - @user.music.each do |song|  
-    = song.title
+  - @user.music.each do |song|
+    = link_to song.title, music_path(song)
     %br/
-    = song.genre
+    = "Genre: #{song.genre}"
     %br/
     = image_tag song.art, width: 150
-    %br/  
+    %br/
     %audio{controls: ""}
       %source{src: "#{song.track}", type: "audio/mpeg"}
       %embed{height: "50", src: "#{song.track}", width: "100"}
+    %br/
+    = link_to pluralize(song.comments.count, 'Comment'), music_path(song) # need to add anchor
+    |
+    = link_to 'Add Comment', music_path(song) # need to add anchor
+    |
+    = link_to 'Delete Track', song, method: :delete, confirm: "Are you sure you'd like to remove #{song.title}?" # only admin and owner-user can do this
+    %br/
+    %br
+
+%hr/
 
 
-/ REFERENCE:
-/ http://www.w3schools.com/html/html_sounds.asp
-/ HTML Audio - The Best Solution
-/ The best solution is to use the HTML5 <audio> element + the <embed> element.
-/ The example below uses the <audio> element and tries to play the audio either as MP3 or OGG. If that fails, the code "falls back" to try the <embed> element:
-/ Example
-/ <audio controls>
-/   <source src="horse.mp3" type="audio/mpeg">
-/   <source src="horse.ogg" type="audio/ogg">
-/   <embed height="50" width="100" src="horse.mp3">
-/ </audio>

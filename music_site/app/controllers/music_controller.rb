@@ -4,6 +4,8 @@ class MusicController < ApplicationController
   end
 
   def show
+    @music = Music.find(params[:id])
+    @creator = User.find(@music.user_id)
   end
 
   def new
@@ -27,6 +29,10 @@ class MusicController < ApplicationController
   end
 
   def destroy
+    @music = Music.find(params[:id])
+    @user_id = @music.user_id
+    @music.delete
+    redirect_to user_path(@user_id)
   end
 
 end

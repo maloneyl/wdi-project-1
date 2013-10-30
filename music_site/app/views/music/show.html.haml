@@ -1,0 +1,44 @@
+%hr/
+
+= @music.title
+%br/
+by
+= link_to "#{@creator.name}", user_path(@creator)
+%br/
+= "Genre: #{@music.genre}"
+%br/
+= image_tag @music.art, width: 150
+%br/
+%audio{controls: ""}
+  %source{src: "#{@music.track}", type: "audio/mpeg"}
+  %embed{height: "50", src: "#{@music.track}", width: "100"}
+
+%hr/
+
+/ COMMENTS
+
+- if @music.comments.any?
+  %h3= pluralize(@music.comments.count, 'Comment')
+  - @music.comments.each do |feedback|
+    = User.find(feedback.user_id).name
+    %br/
+    = time_ago_in_words(feedback.created_at) + ' ago'
+    %br/
+    = "Message: #{feedback.content}"
+    %br/
+    = link_to 'Delete Comment', [feedback.music, feedback], method: :delete, confirm: "Are you sure you'd like to remove this comment?" # only admin and owner-user can do this
+    %br/
+    %br/
+
+%hr/
+
+/ ADD A COMMENT
+
+%h3 Add a comment
+= form_for([@music, @music.comments.build]) do |f|
+  = f.label :content
+  = f.text_area :content
+  %br/
+  = f.submit
+
+%hr/

@@ -13,7 +13,9 @@ MusicSite::Application.routes.draw do
   #           PUT    /users/:id(.:format)      users#update
   #           DELETE /users/:id(.:format)      users#destroy
 
-  resources :music
+  resources :music do
+    resources :comments
+  end
 
   resources :sessions, only: [:new, :create, :destroy]
 

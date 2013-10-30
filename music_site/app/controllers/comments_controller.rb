@@ -1,0 +1,32 @@
+class CommentsController < ApplicationController
+
+# reminder: comments is nested within music! need to pass both params!
+#     music_comments GET    /music/:music_id/comments(.:format)          comments#index
+#                    POST   /music/:music_id/comments(.:format)          comments#create
+#  new_music_comment GET    /music/:music_id/comments/new(.:format)      comments#new
+# edit_music_comment GET    /music/:music_id/comments/:id/edit(.:format) comments#edit
+#      music_comment GET    /music/:music_id/comments/:id(.:format)      comments#show
+#                    PUT    /music/:music_id/comments/:id(.:format)      comments#update
+#                    DELETE /music/:music_id/comments/:id(.:format)      comments#destroy
+
+  def create
+    music_id = params[:music_id]
+    if params[:comment][:content].empty?
+      redirect_to music_path(music_id), notice: 'Comment cannot be blank!'
+      return
+    else
+      comment = Comment.new(params[:comment])
+      comment.user_id = current_user.id
+      comment.save
+      redirect_to music_path(music_id), notice: 'Comment posted!'
+    end
+  end
+
+  def destroy
+    @music = Music.find(params[:music_id])
+    @comment = @music.comments.find(params[:id])
+    @comment.delete
+    redirect_to music_path(@music)
+  end
+
+end
