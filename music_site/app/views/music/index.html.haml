@@ -1,0 +1,12 @@
+%h2 All Music
+
+- @music.each do |song|
+  %h5= song.title
+  %p
+    by
+    = link_to "#{User.find(song.user_id).name}", user_path(User.find(song.user_id))
+    %br/
+    = "Genre: #{song.genre}"
+    %br/
+    = image_tag song.art, width: 150
+    %br/

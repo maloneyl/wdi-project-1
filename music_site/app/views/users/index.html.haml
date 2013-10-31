@@ -1,1 +1,8 @@
-hihi index
+%h2 All Users
+
+- @users.each do |user|
+  %h5= link_to user.name, user_path(user)
+  %p
+    = image_tag user.profile.avatar, width: 150 if user.profile
+    %br/
+    = link_to pluralize(user.music.count, 'Track'), user_path(user)
