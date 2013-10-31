@@ -20,9 +20,9 @@
   %h5{ style: "font-family: #{@user.profile.font_face_primary}; color: #{@user.profile.font_color_primary}" }
     Links
   %p{ style: "font-family: #{@user.profile.font_face_secondary}; color: #{@user.profile.font_color_secondary}" }
-    = link_to 'Twitter', "http://wwww.twitter.com/#{@user.profile.twitter}"
-    = link_to 'Facebook', "http://wwww.facebook.com/#{@user.profile.facebook}"
-    = link_to 'Website', @user.profile.website
+    = link_to 'Twitter', "http://wwww.twitter.com/#{@user.profile.twitter}" if @user.profile.twitter?
+    = link_to 'Facebook', "http://wwww.facebook.com/#{@user.profile.facebook}" if @user.profile.facebook?
+    = link_to 'Website', @user.profile.website if @user.profile.website?
 
 - else
   %h2= "#{@user.name} (#{@user.username})"
@@ -32,9 +32,10 @@
 
 / * MUSIC STUFF
 
+%h3{ style: "font-family: #{@user.profile.font_face_primary}; color: #{@user.profile.font_color_primary}" }
+  Music
+
 - if @user.music != []
-  %h3{ style: "font-family: #{@user.profile.font_face_primary}; color: #{@user.profile.font_color_primary}" }
-    Music
   %p{ style: "font-family: #{@user.profile.font_face_secondary}; color: #{@user.profile.font_color_secondary}" }
     - @user.music.each do |song|
       = link_to song.title, music_path(song)
@@ -59,8 +60,8 @@
       %br/
       %br/
 - else
-  %h3 Music
-  = "#{@user.name} hasn't shared any music!"
+  %p{ style: "font-family: #{@user.profile.font_face_secondary}; color: #{@user.profile.font_color_secondary}" }
+    = "#{@user.name} hasn't shared any music!"
 
 - if @user == @current_user
   %p= link_to 'Add a track', new_music_path

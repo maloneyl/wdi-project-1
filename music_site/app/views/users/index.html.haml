@@ -6,3 +6,5 @@
     = image_tag user.profile.avatar, width: 150 if user.profile
     %br/
     = link_to pluralize(user.music.count, 'Track'), user_path(user)
+
+= will_paginate @users

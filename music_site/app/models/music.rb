@@ -11,4 +11,6 @@ class Music < ActiveRecord::Base
   mount_uploader :art, ArtUploader
   mount_uploader :track, TrackUploader
 
+  acts_as_list scope: :user
+
 end

@@ -1,8 +1,11 @@
 class MusicController < ApplicationController
 
-load_and_authorize_resource
+  load_and_authorize_resource except: [:index]
 
   def index
+    page = params[:page] || 1
+    @music = Music.paginate(page: page, per_page: 10).order(:created_at).all
+    authorize! :read, @music
   end
 
   def show
