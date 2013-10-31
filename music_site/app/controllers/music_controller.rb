@@ -28,6 +28,13 @@ load_and_authorize_resource
   end
 
   def update
+    @music = Music.find(params[:id])
+    if @music.update_attributes(params[:music])
+      redirect_to music_path(@music), notice: 'Track successfully updated!'
+    else
+      flash.now[:alert] = 'Track NOT updated!'
+      render :edit
+    end
   end
 
   def destroy
