@@ -14,6 +14,7 @@ class ProfilesController < ApplicationController
     @user = User.find(current_user.id)
     if @user.profile.nil?
       @profile = Profile.new
+      list_web_safe_fonts
     else
       redirect_to user_path(@user), notice: 'You already have a profile! Check this out...'
     end
@@ -31,6 +32,7 @@ class ProfilesController < ApplicationController
 
   def edit
     @profile = Profile.find_by_user_id(@current_user.id)
+    list_web_safe_fonts
   end
 
   def update
@@ -47,6 +49,10 @@ class ProfilesController < ApplicationController
     @profile = Profile.find(params[:id])
     @profile.destroy
     redirect_to user_path(@current_user), notice: 'Profile removed!'
+  end
+
+  def list_web_safe_fonts
+    @available_fonts = [ 'Arial', 'Helvetica', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Georgia', 'Impact', 'Lucida Console', 'Monaco', 'Lucida Sans Unicode', 'Lucida Grande', 'Palatino Linotype', 'Book Antiqua', 'Palatino', 'Tahoma', 'Geneva', 'Times New Roman', 'Times', 'Trebuchet MS', 'Verdana', 'Geneva' ]
   end
 
 end

@@ -1,7 +1,7 @@
 %h2 All Music
 
 - @music.each do |song|
-  %h5= song.title
+  %h5= link_to song.title, music_path(song)
   %p
     by
     = link_to "#{User.find(song.user_id).name}", user_path(User.find(song.user_id))

@@ -11,6 +11,10 @@ load_and_authorize_resource
 #                    PUT    /music/:music_id/comments/:id(.:format)      comments#update
 #                    DELETE /music/:music_id/comments/:id(.:format)      comments#destroy
 
+  def index # e.g. /music/1/comments will simply show /music/1
+    redirect_to music_path(params[:music_id])
+  end
+
   def create
     music_id = params[:music_id]
     if params[:comment][:content].empty?

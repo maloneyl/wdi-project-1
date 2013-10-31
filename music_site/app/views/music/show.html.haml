@@ -3,9 +3,11 @@
 by
 = link_to "#{@creator.name}", user_path(@creator)
 %br/
+= image_tag @music.art, width: 150
+%br/
 = "Genre: #{@music.genre}"
 %br/
-= image_tag @music.art, width: 150
+= @music.description
 %br/
 %audio{controls: ""}
   %source{src: "#{@music.track}", type: "audio/mpeg"}
@@ -47,5 +49,3 @@ by
   to comment. Don't have an account yet?
   = link_to 'Sign up now!', signup_path
   %br/
-
-%hr/

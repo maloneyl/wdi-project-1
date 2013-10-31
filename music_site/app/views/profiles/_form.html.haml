@@ -10,9 +10,9 @@
     %legend About
     .field
       = f.label :avatar
-      = image_tag @profile.avatar_url(:thumb) if @profile.avatar?      
+      = image_tag @profile.avatar_url(:thumb) if @profile.avatar?
       = f.file_field :avatar
-      %br/ 
+      %br/
     .field
       = f.label :location
       = f.text_field :location
@@ -24,7 +24,7 @@
     .field
       = f.label :twitter, 'Twitter username'
       = f.text_field :twitter
-      %br/    
+      %br/
     .field
       = f.label :facebook, 'Facebook username'
       = f.text_field :facebook
@@ -36,13 +36,13 @@
       %br/
     %legend Look and Feel
     .field
-      = f.label :font_face_primary, 'Primary font face'
-      = f.text_field :font_face_primary # maybe offer a list of options instead?
+      = f.label :font_face_primary, 'Font for Section Headings'
+      = f.select :font_face_primary, options_for_select(@available_fonts, @profile.font_face_primary), include_blank: true
       %br/
     .field
-      = f.label :font_face_secondary, 'Secondary font face'
-      = f.text_field :font_face_secondary # maybe offer a list of options instead?
-      %br/      
+      = f.label :font_face_secondary, 'Font for Main Content'
+      = f.select :font_face_secondary, options_for_select(@available_fonts, @profile.font_face_secondary), include_blank: true
+      %br/
     .field
       = f.label :font_color_primary, 'Primary font color in hex'
       = link_to "(Need help?)", 'http://www.html-color-codes.com', target: '_blank'
@@ -52,7 +52,7 @@
       = f.label :font_color_secondary, 'Secondary font color in hex'
       = link_to "(Need help?)", 'http://www.html-color-codes.com', target: '_blank'
       = f.text_field :font_color_secondary
-      %br/            
+      %br/
     .field
       = f.label :link_color, 'Link color in hex'
       = f.text_field :link_color
@@ -60,7 +60,7 @@
     .field
       = f.label :background_image # will see how layout goes... could do header image + background color instead?
       = f.text_field :background_image # need to set up upload
-      %br/      
+      %br/
       %br/
     .actions
       = f.submit
