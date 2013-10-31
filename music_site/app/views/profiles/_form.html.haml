@@ -36,25 +36,26 @@
       %br/
     %legend Look and Feel
     .field
-      = f.label :font_face_primary, 'Font for Section Headings'
+      = f.label :font_face_primary, 'Font for section headings'
       = f.select :font_face_primary, options_for_select(@available_fonts, @profile.font_face_primary), include_blank: true
       %br/
     .field
-      = f.label :font_face_secondary, 'Font for Main Content'
+      = f.label :font_face_secondary, 'Font for section content'
       = f.select :font_face_secondary, options_for_select(@available_fonts, @profile.font_face_secondary), include_blank: true
       %br/
     .field
-      = f.label :font_color_primary, 'Primary font color in hex'
+      = f.label :font_color_primary, 'Font color for section headings (e.g. "green" or "#006600")'
       = link_to "(Need help?)", 'http://www.html-color-codes.com', target: '_blank'
       = f.text_field :font_color_primary
       %br/
     .field
-      = f.label :font_color_secondary, 'Secondary font color in hex'
+      = f.label :font_color_secondary, 'Font color for section content (e.g. "green" or "#006600")'
       = link_to "(Need help?)", 'http://www.html-color-codes.com', target: '_blank'
       = f.text_field :font_color_secondary
       %br/
     .field
-      = f.label :link_color, 'Link color in hex'
+      = f.label :link_color, 'Link color (e.g. "green" or "#006600")'
+      = link_to "(Need help?)", 'http://www.html-color-codes.com', target: '_blank'
       = f.text_field :link_color
       %br/
     .field

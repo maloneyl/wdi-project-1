@@ -4,22 +4,22 @@
 / * BASIC PROFILE STUFF
 
 - if @user.profile
-  %h2{ style: "font-family: #{@user.profile.font_face_primary}; color: ##{@user.profile.font_color_primary}" }
+  %h2{ style: "font-family: #{@user.profile.font_face_primary}; color: #{@user.profile.font_color_primary}" }
     = "#{@user.name} (#{@user.username})"
   = image_tag @user.profile.avatar_url(:thumb) if @user.profile.avatar?
-  %h5{ style: "font-family: #{@user.profile.font_face_primary}; color: ##{@user.profile.font_color_primary}" }
+  %h5{ style: "font-family: #{@user.profile.font_face_primary}; color: #{@user.profile.font_color_primary}" }
     Location
-  %p{ style: "font-family: #{@user.profile.font_face_secondary}; color: ##{@user.profile.font_color_secondary}" }
+  %p{ style: "font-family: #{@user.profile.font_face_secondary}; color: #{@user.profile.font_color_secondary}" }
     = @user.profile.location
 
-  %h5{ style: "font-family: #{@user.profile.font_face_primary}; color: ##{@user.profile.font_color_primary}" }
+  %h5{ style: "font-family: #{@user.profile.font_face_primary}; color: #{@user.profile.font_color_primary}" }
     Blurb
-  %p{ style: "font-family: #{@user.profile.font_face_secondary}; color: ##{@user.profile.font_color_secondary}" }
+  %p{ style: "font-family: #{@user.profile.font_face_secondary}; color: #{@user.profile.font_color_secondary}" }
     = @user.profile.bio
 
-  %h5{ style: "font-family: #{@user.profile.font_face_primary}; color: ##{@user.profile.font_color_primary}" }
+  %h5{ style: "font-family: #{@user.profile.font_face_primary}; color: #{@user.profile.font_color_primary}" }
     Links
-  %p{ style: "font-family: #{@user.profile.font_face_secondary}; color: ##{@user.profile.font_color_secondary}" }
+  %p{ style: "font-family: #{@user.profile.font_face_secondary}; color: #{@user.profile.font_color_secondary}" }
     = link_to 'Twitter', "http://wwww.twitter.com/#{@user.profile.twitter}"
     = link_to 'Facebook', "http://wwww.facebook.com/#{@user.profile.facebook}"
     = link_to 'Website', @user.profile.website
@@ -33,9 +33,9 @@
 / * MUSIC STUFF
 
 - if @user.music != []
-  %h3{ style: "font-family: #{@user.profile.font_face_primary}; color: ##{@user.profile.font_color_primary}" }
+  %h3{ style: "font-family: #{@user.profile.font_face_primary}; color: #{@user.profile.font_color_primary}" }
     Music
-  %p{ style: "font-family: #{@user.profile.font_face_secondary}; color: ##{@user.profile.font_color_secondary}" }
+  %p{ style: "font-family: #{@user.profile.font_face_secondary}; color: #{@user.profile.font_color_secondary}" }
     - @user.music.each do |song|
       = link_to song.title, music_path(song)
       %br/
