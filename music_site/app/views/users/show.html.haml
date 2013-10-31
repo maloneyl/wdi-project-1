@@ -3,65 +3,74 @@
 
 / * BASIC PROFILE STUFF
 
-- if @user.profile
-  %h2{ style: "font-family: #{@user.profile.font_face_primary}; color: #{@user.profile.font_color_primary}" }
-    = "#{@user.name} (#{@user.username})"
-  = image_tag @user.profile.avatar_url(:thumb) if @user.profile.avatar?
-  %h5{ style: "font-family: #{@user.profile.font_face_primary}; color: #{@user.profile.font_color_primary}" }
-    Location
-  %p{ style: "font-family: #{@user.profile.font_face_secondary}; color: #{@user.profile.font_color_secondary}" }
-    = @user.profile.location
+.row
+  .col-md-3.col-md-offset-1#user-profile
+    - if @user.profile
+      %h2{ style: "font-family: #{@user.profile.font_face_primary}; color: #{@user.profile.font_color_primary}" }
+        = "#{@user.name} (#{@user.username})"
+      = image_tag @user.profile.avatar_url(:thumb) if @user.profile.avatar?
+      %h5{ style: "font-family: #{@user.profile.font_face_primary}; color: #{@user.profile.font_color_primary}" }
+        Location
+      %p{ style: "font-family: #{@user.profile.font_face_secondary}; color: #{@user.profile.font_color_secondary}" }
+        = @user.profile.location
 
-  %h5{ style: "font-family: #{@user.profile.font_face_primary}; color: #{@user.profile.font_color_primary}" }
-    Blurb
-  %p{ style: "font-family: #{@user.profile.font_face_secondary}; color: #{@user.profile.font_color_secondary}" }
-    = @user.profile.bio
+      %h5{ style: "font-family: #{@user.profile.font_face_primary}; color: #{@user.profile.font_color_primary}" }
+        Blurb
+      %p{ style: "font-family: #{@user.profile.font_face_secondary}; color: #{@user.profile.font_color_secondary}" }
+        = @user.profile.bio
 
-  %h5{ style: "font-family: #{@user.profile.font_face_primary}; color: #{@user.profile.font_color_primary}" }
-    Links
-  %p{ style: "font-family: #{@user.profile.font_face_secondary}; color: #{@user.profile.font_color_secondary}" }
-    = link_to 'Twitter', "http://wwww.twitter.com/#{@user.profile.twitter}" if @user.profile.twitter?
-    = link_to 'Facebook', "http://wwww.facebook.com/#{@user.profile.facebook}" if @user.profile.facebook?
-    = link_to 'Website', @user.profile.website if @user.profile.website?
+      %h5{ style: "font-family: #{@user.profile.font_face_primary}; color: #{@user.profile.font_color_primary}" }
+        Links
+      %p{ style: "font-family: #{@user.profile.font_face_secondary}; color: #{@user.profile.font_color_secondary}" }
+        = link_to 'Twitter', "http://wwww.twitter.com/#{@user.profile.twitter}" if @user.profile.twitter?
+        %br/
+        = link_to 'Facebook', "http://wwww.facebook.com/#{@user.profile.facebook}" if @user.profile.facebook?
+        %br/
+        = link_to 'Website', @user.profile.website if @user.profile.website?
 
-- else
-  %h2= "#{@user.name} (#{@user.username})"
-  = "#{@user.name} hasn't created a profile!"
+    - else
+      %h2= "#{@user.name} (#{@user.username})"
+      = "#{@user.name} hasn't created a profile!"
 
-%hr/
+  .col-md-6.col-md-offset-1#user-music
+    %h3{ style: "font-family: #{@user.profile.font_face_primary}; color: #{@user.profile.font_color_primary}" }
+      Music
 
-/ * MUSIC STUFF
+    - if @user.music != []
+      - @user.music.each do |song|
+        .track-wrapper
+          .track-image
+            = image_tag song.art, width: 150
+          .track-lead
+            = link_to song.title, music_path(song)
 
-%h3{ style: "font-family: #{@user.profile.font_face_primary}; color: #{@user.profile.font_color_primary}" }
-  Music
+      %table.table.table-hover
+        - @user.music.each do |song|
+          %tbody
+            %tr
+              %td= image_tag song.art, width: 150
+              %td
+                %h4= song.title
+                = "Genre(s): #{song.genre}"
+                %br>/
+                %em= song.description
+                %br>/
+                %audio{controls: ""}
+                  %source{src: "#{song.track}", type: "audio/mpeg"}
+                %br/
+                = link_to pluralize(song.comments.count, 'Comment'), music_path(song) # need to add anchor
+                |
+                = link_to 'Add Comment', music_path(song) # need to add anchor
+                - if can? :update, song
+                  |
+                  = link_to 'Edit Track', edit_music_path(song)
+                - if can? :destroy, song
+                  |
+                  = link_to 'Delete Track', song, method: :delete, confirm: "Are you sure you'd like to remove #{song.title}?"
 
-- if @user.music != []
-  %p{ style: "font-family: #{@user.profile.font_face_secondary}; color: #{@user.profile.font_color_secondary}" }
-    - @user.music.each do |song|
-      = link_to song.title, music_path(song)
-      %br/
-      = "Genre: #{song.genre}"
-      %br/
-      = image_tag song.art, width: 150
-      %br/
-      %audio{controls: ""}
-        %source{src: "#{song.track}", type: "audio/mpeg"}
-        %embed{height: "50", src: "#{song.track}", width: "100"}
-      %br/
-      = link_to pluralize(song.comments.count, 'Comment'), music_path(song) # need to add anchor
-      |
-      = link_to 'Add Comment', music_path(song) # need to add anchor
-      - if can? :update, song
-        |
-        = link_to 'Edit Track', edit_music_path(song)
-      - if can? :destroy, song
-        |
-        = link_to 'Delete Track', song, method: :delete, confirm: "Are you sure you'd like to remove #{song.title}?"
-      %br/
-      %br/
-- else
-  %p{ style: "font-family: #{@user.profile.font_face_secondary}; color: #{@user.profile.font_color_secondary}" }
-    = "#{@user.name} hasn't shared any music!"
+    - else
+      %p{ style: "font-family: #{@user.profile.font_face_secondary}; color: #{@user.profile.font_color_secondary}" }
+        = "#{@user.name} hasn't shared any music!"
 
-- if @user == @current_user
-  %p= link_to 'Add a track', new_music_path
+    - if @user == @current_user
+      %p= link_to 'Add a track', new_music_path

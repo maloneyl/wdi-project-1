@@ -30,7 +30,7 @@
             %button.btn.btn-default{type: "submit"} Submit
           %ul.nav.navbar-nav.navbar-right
             - if current_user
-              %li
+              %li.active
                 %a{href: user_path(current_user)} #{current_user.name}
               %li
                 %a{href: edit_user_path(current_user)} Account Settings
@@ -42,7 +42,7 @@
                   %a{href: new_profile_path} Create Profile
               %li
                 %a{href: new_music_path} Add Music
-              %li.a
+              %li
                 = link_to 'Log Out', logout_path, method: :delete
             - else
               %li
@@ -51,14 +51,12 @@
                 %a{href: signup_path} Sign Up
         .clear
 
-    .alert.alert-info
+    .flash
       - flash.each do |name, msg|
         = content_tag :div, msg, :id => "flash_#{name}"
 
     = yield
 
-
-  %hr/
-  .footer
+  %footer
     %small
       This website is a non-commercial student project. No copyright infringement intended.

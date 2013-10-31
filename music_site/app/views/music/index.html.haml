@@ -1,14 +1,15 @@
 %h2 All Music
 
-- @music.each do |song|
-  %h5= link_to song.title, music_path(song)
-  %p
-    by
-    = link_to "#{User.find(song.user_id).name}", user_path(User.find(song.user_id))
-    %br/
-    = "Genre: #{song.genre}"
-    %br/
-    = image_tag song.art, width: 150
-    %br/
+%table.table.table-hover
+  - @music.each do |song|
+    %tbody
+      %tr
+        %td= image_tag song.art, width: 150
+        %td
+          %h4= link_to song.title, music_path(song)
+          By:
+          = link_to "#{User.find(song.user_id).name}", user_path(User.find(song.user_id))
+          %br/
+          = "Genre: #{song.genre}"
 
 = will_paginate @music

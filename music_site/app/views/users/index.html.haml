@@ -1,10 +1,13 @@
 %h2 All Users
 
-- @users.each do |user|
-  %h5= link_to user.name, user_path(user)
-  %p
-    = image_tag user.profile.avatar, width: 150 if user.profile
-    %br/
-    = link_to pluralize(user.music.count, 'Track'), user_path(user)
+%table.table.table-hover
+  - @users.each do |user|
+    %tbody
+      %tr
+        %td= image_tag user.profile.avatar, width: 150 if user.profile
+        %td
+          %h5= link_to user.name, user_path(user)
+          %br/
+          = link_to pluralize(user.music.count, 'Track'), user_path(user)
 
 = will_paginate @users
