@@ -41,6 +41,10 @@
       %h2= "#{@user.name} (#{@user.username})"
       %p= "#{@user.name} hasn't created a profile!"
 
+    - if can? :destroy, @user
+      %p= link_to 'Remove Account', @user, method: :delete, confirm: "Are you sure you'd like to remove this account? There's no undo!"
+
+
   .col-md-6.col-md-offset-1#user-music
     %h3 Music
 
