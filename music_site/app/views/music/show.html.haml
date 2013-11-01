@@ -10,12 +10,12 @@
       a, a:hover {
         color: #{@creator.profile.link_color}
       }
-  - if @creator.profile.background_image != ''
-    :css
-      body {
-        background-image: url(#{@creator.profile.background_image});
-        background-size: cover;
-      }
+    - if @creator.profile.background_image != ''
+      :css
+        body {
+          background-image: url(#{@creator.profile.background_image});
+          background-size: cover;
+        }
 
 .row
   .col-md-8.col-md-offset-1#music

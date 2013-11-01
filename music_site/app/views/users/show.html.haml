@@ -10,12 +10,13 @@
       a, a:hover {
         color: #{@user.profile.link_color}
       }
-  - if @user.profile.background_image != ''
-    :css
-      body {
-        background-image: url(#{@user.profile.background_image});
-        background-size: cover;
-      }
+  - if @user.profile != nil
+    - if @user.profile.background_image != ''
+      :css
+        body {
+          background-image: url(#{@user.profile.background_image});
+          background-size: cover;
+        }
 
 / * BASIC PROFILE STUFF
 
@@ -38,7 +39,7 @@
 
     - else
       %h2= "#{@user.name} (#{@user.username})"
-      = "#{@user.name} hasn't created a profile!"
+      %p= "#{@user.name} hasn't created a profile!"
 
   .col-md-6.col-md-offset-1#user-music
     %h3 Music
