@@ -1,28 +1,36 @@
-/ Add in-line CSS for custom layouts?
-/ Look into how to structure profile page
+- content_for :stylesheets do
+  - if @user.profile.present?
+    :css
+      h2, h3, h4, h5 {
+        font-family: #{@user.profile.font_face_primary}; color: #{@user.profile.font_color_primary}
+      }
+      p {
+        font-family: #{@user.profile.font_face_secondary}; color: #{@user.profile.font_color_secondary}
+      }
+      a, a:hover {
+        color: #{@user.profile.link_color}
+      }
+  - if @user.profile.background_image != ''
+    :css
+      body {
+        background-image: url(#{@user.profile.background_image});
+        background-size: cover;
+      }
 
 / * BASIC PROFILE STUFF
 
 .row
   .col-md-3.col-md-offset-1#user-profile
     - if @user.profile
-      %h2{ style: "font-family: #{@user.profile.font_face_primary}; color: #{@user.profile.font_color_primary}" }
-        = "#{@user.name} (#{@user.username})"
+      %h2= "#{@user.name}"
       = image_tag @user.profile.avatar_url(:thumb) if @user.profile.avatar?
-      %h5{ style: "font-family: #{@user.profile.font_face_primary}; color: #{@user.profile.font_color_primary}" }
-        Location
-      %p{ style: "font-family: #{@user.profile.font_face_secondary}; color: #{@user.profile.font_color_secondary}" }
-        = @user.profile.location
-
-      %h5{ style: "font-family: #{@user.profile.font_face_primary}; color: #{@user.profile.font_color_primary}" }
-        Blurb
-      %p{ style: "font-family: #{@user.profile.font_face_secondary}; color: #{@user.profile.font_color_secondary}" }
-        = @user.profile.bio
-
-      %h5{ style: "font-family: #{@user.profile.font_face_primary}; color: #{@user.profile.font_color_primary}" }
-        Links
-      %p{ style: "font-family: #{@user.profile.font_face_secondary}; color: #{@user.profile.font_color_secondary}" }
-        = link_to 'Twitter', "http://wwww.twitter.com/#{@user.profile.twitter}" if @user.profile.twitter?
+      %h5 Location
+      %p= @user.profile.location
+      %h5 Blurb
+      %p= @user.profile.bio
+      %h5 Links
+      %p
+        =link_to 'Twitter', "http://wwww.twitter.com/#{@user.profile.twitter}" if @user.profile.twitter?
         %br/
         = link_to 'Facebook', "http://wwww.facebook.com/#{@user.profile.facebook}" if @user.profile.facebook?
         %br/
@@ -33,17 +41,9 @@
       = "#{@user.name} hasn't created a profile!"
 
   .col-md-6.col-md-offset-1#user-music
-    %h3{ style: "font-family: #{@user.profile.font_face_primary}; color: #{@user.profile.font_color_primary}" }
-      Music
+    %h3 Music
 
     - if @user.music != []
-      - @user.music.each do |song|
-        .track-wrapper
-          .track-image
-            = image_tag song.art, width: 150
-          .track-lead
-            = link_to song.title, music_path(song)
-
       %table.table.table-hover
         - @user.music.each do |song|
           %tbody
@@ -51,26 +51,29 @@
               %td= image_tag song.art, width: 150
               %td
                 %h4= song.title
-                = "Genre(s): #{song.genre}"
-                %br>/
-                %em= song.description
-                %br>/
+                %p
+                  Genre: #{song.genre}
+                  %br>/
+                  %em= song.description
+                  %br>/
                 %audio{controls: ""}
                   %source{src: "#{song.track}", type: "audio/mpeg"}
                 %br/
-                = link_to pluralize(song.comments.count, 'Comment'), music_path(song) # need to add anchor
-                |
-                = link_to 'Add Comment', music_path(song) # need to add anchor
-                - if can? :update, song
+                %p
+                  = link_to pluralize(song.comments.count, 'Comment'), music_path(song) # need to add anchor
                   |
-                  = link_to 'Edit Track', edit_music_path(song)
-                - if can? :destroy, song
-                  |
-                  = link_to 'Delete Track', song, method: :delete, confirm: "Are you sure you'd like to remove #{song.title}?"
+                  = link_to 'Add Comment', music_path(song) # need to add anchor
+                  - if can? :update, song
+                    |
+                    = link_to 'Edit Track', edit_music_path(song)
+                  - if can? :destroy, song
+                    |
+                    = link_to 'Delete Track', song, method: :delete, confirm: "Are you sure you'd like to remove #{song.title}?"
 
     - else
-      %p{ style: "font-family: #{@user.profile.font_face_secondary}; color: #{@user.profile.font_color_secondary}" }
+      %p
         = "#{@user.name} hasn't shared any music!"
 
     - if @user == @current_user
-      %p= link_to 'Add a track', new_music_path
+      %p
+        = link_to 'Add a track', new_music_path

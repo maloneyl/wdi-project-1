@@ -4,6 +4,7 @@
     %title JAMS: Just Another Music Site
     = stylesheet_link_tag 'bootstrap', media: 'all'
     = stylesheet_link_tag 'application', media: "all"
+    = yield :stylesheets
     = javascript_include_tag 'application'
     = csrf_meta_tags
 
@@ -27,7 +28,7 @@
           %form.navbar-form.navbar-left{role: "search"}
             .form-group
               %input.form-control{placeholder: "Search", type: "text"}/
-            %button.btn.btn-default{type: "submit"} Submit
+            %button.btn.btn-default{type: "submit"} Go
           %ul.nav.navbar-nav.navbar-right
             - if current_user
               %li.active
@@ -36,7 +37,7 @@
                 %a{href: edit_user_path(current_user)} Account Settings
               - if current_user.profile.present?
                 %li
-                  %a{href: edit_profile_path(current_user)} Edit Profile
+                  %a{href: edit_profile_path(current_user.profile.id)} Edit Profile
               - else
                 %li
                   %a{href: new_profile_path} Create Profile
