@@ -59,8 +59,9 @@
       = f.text_field :link_color
       %br/
     .field
-      = f.label :background_image # will see how layout goes... could do header image + background color instead?
-      = f.text_field :background_image # need to set up upload
+      = f.label :background_image
+      = image_tag @profile.background_image_url(:thumb) if @profile.background_image?
+      = f.file_field :background_image
       %br/
       %br/
     .actions

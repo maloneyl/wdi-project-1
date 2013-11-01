@@ -5,6 +5,6 @@ class Profile < ActiveRecord::Base
   belongs_to :user
 
   mount_uploader :avatar, AvatarUploader
-  # will need one for background (or header) image too
+  mount_uploader :background_image, BackgroundImageUploader
 
 end
