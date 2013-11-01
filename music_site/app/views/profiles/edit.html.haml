@@ -2,10 +2,10 @@
 
   .row
     .col-md-8.col-md-offset-1
-    %h2 Edit Profile
+      %h2 Edit Profile
 
-    = render 'form'
+      = render 'form'
 
-    %p
+      %p
 
-    = link_to 'Remove Profile', @profile, method: :delete, confirm: "Are you sure you'd like to remove your profile? There's no undo!"
+      = link_to 'Remove Profile', @profile, method: :delete, confirm: "Are you sure you'd like to remove your profile? There's no undo!"
