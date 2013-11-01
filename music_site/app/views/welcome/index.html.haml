@@ -1,12 +1,14 @@
-.center
-  = image_tag 'jams.png', height: 500
+.row
+  .col-md-11.col-md-offset-1
 
-%h1
-  the latest music community
-  %br/
-  for budding creatives everywhere
+    = image_tag 'jams.png', height: 500
 
-%h4
-  = link_to 'Sign up now', signup_path
-  or
-  = link_to 'check out our latest music addition.', music_path(@latest_music)
+    %h1
+      the latest music community
+      %br/
+      for budding creatives everywhere
+
+    %h4
+      = link_to 'Sign up now', signup_path
+      or
+      = link_to 'check out our latest music addition.', music_path(@latest_music)

@@ -1,9 +1,11 @@
 - if can? :update, @user
 
-  %h2 Edit Account
+  .row
+    .col-md-8.col-md-offset-1
+      %h2 Edit Account
 
-  = render 'form'
+      = render 'form'
 
-  %p
+      %p
 
-  = link_to 'Remove Account', @user, method: :delete, confirm: "Are you sure you'd like to remove your account? There's no undo!"
+      = link_to 'Remove Account', @user, method: :delete, confirm: "Are you sure you'd like to remove your account? There's no undo!"

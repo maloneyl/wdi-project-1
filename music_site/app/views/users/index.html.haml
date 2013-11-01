@@ -1,14 +1,17 @@
-%h2 All Users
+.row
+  .col-md-8.col-md-offset-1
 
-%table.table.table-hover
-  - @users.each do |user|
-    %tbody
-      %tr
-        %td= image_tag user.profile.avatar, width: 150 if user.profile
-        %td
-          %h4= link_to user.name, user_path(user)
-          Member since #{user.created_at.strftime("%d %b %Y")}
-          %br/
-          = link_to "#{pluralize(user.music.count, 'song')} available", user_path(user)
+    %h2 All Users
 
-= will_paginate @users
+    %table.table.table-hover
+      - @users.each do |user|
+        %tbody
+          %tr
+            %td= image_tag user.profile.avatar, width: 150 if user.profile
+            %td
+              %h4= link_to user.name, user_path(user)
+              Member since #{user.created_at.strftime("%d %b %Y")}
+              %br/
+              = link_to "#{pluralize(user.music.count, 'song')} available", user_path(user)
+
+    = will_paginate @users

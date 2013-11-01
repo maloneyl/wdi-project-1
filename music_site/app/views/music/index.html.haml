@@ -1,15 +1,18 @@
-%h2 All Music
+.row
+  .col-md-8.col-md-offset-1
 
-%table.table.table-hover
-  - @music.each do |song|
-    %tbody
-      %tr
-        %td= image_tag song.art, width: 150
-        %td
-          %h4= link_to song.title, music_path(song)
-          By:
-          = link_to "#{User.find(song.user_id).name}", user_path(User.find(song.user_id))
-          %br/
-          = "Genre: #{song.genre}"
+    %h2 All Music
 
-= will_paginate @music
+    %table.table.table-hover
+      - @music.each do |song|
+        %tbody
+          %tr
+            %td= image_tag song.art, width: 150
+            %td
+              %h4= link_to song.title, music_path(song)
+              By:
+              = link_to "#{User.find(song.user_id).name}", user_path(User.find(song.user_id))
+              %br/
+              = "Genre: #{song.genre}"
+
+    = will_paginate @music
