@@ -7,7 +7,10 @@
       - @users.each do |user|
         %tbody
           %tr
-            %td= image_tag user.profile.avatar, width: 150 if user.profile
+            - if user.profile
+              %td= image_tag user.profile.avatar, width: 150
+            - else
+              %td= image_tag '/assets/placeholders/default_avatar.png', width: 150
             %td
               %h4= link_to user.name, user_path(user)
               Member since #{user.created_at.strftime("%d %b %Y")}
