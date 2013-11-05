@@ -2,6 +2,8 @@ class ProfilesController < ApplicationController
 
   load_and_authorize_resource
 
+  include ProfileHelper # where the method list_web_safe_fonts resides
+
   def index
   end
 
@@ -49,10 +51,6 @@ class ProfilesController < ApplicationController
     @profile = Profile.find(params[:id])
     @profile.destroy
     redirect_to user_path(@current_user), notice: 'Profile removed!'
-  end
-
-  def list_web_safe_fonts
-    @available_fonts = [ 'Arial', 'Helvetica', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Georgia', 'Impact', 'Lucida Console', 'Monaco', 'Lucida Sans Unicode', 'Lucida Grande', 'Palatino Linotype', 'Book Antiqua', 'Palatino', 'Tahoma', 'Geneva', 'Times New Roman', 'Times', 'Trebuchet MS', 'Verdana' ]
   end
 
 end
