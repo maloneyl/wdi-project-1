@@ -23,6 +23,11 @@ class Ability
       if user.role?(:musician) || user.role?(:listener)
         can :update, User do |account|
           account.id == user.id
+        # below one-line version doesn't work:
+        #    can :update, User { |account| account.id == user.id }
+        end
+        can :destroy, User do |account|
+          account.id == user.id
         end
         can :create, Profile
         can :update, Profile do |profile|
