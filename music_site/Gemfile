@@ -23,8 +23,11 @@ gem 'fog', '~> 1.3.1' # for Amazon Web Services
 # Pagination
 gem 'will_paginate', '~> 3.0'
 
-# Acts as List
-gem 'acts_as_list'
+# # Acts as List
+# gem 'acts_as_list'
+
+# Search
+gem 'textacular', '~> 3.0'
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -8,7 +8,7 @@
         %tbody
           %tr
             - if user.profile
-              %td= image_tag user.profile.avatar, width: 150
+              %td= image_tag user.profile.avatar_url(:thumb), width: 150 # maybe the uploader should create another set of even-smaller-thumbs for index view?
             - else
               %td= image_tag '/assets/placeholders/default_avatar.png', width: 150
             %td

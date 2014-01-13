@@ -1,9 +1,11 @@
 - if can? :update, @music
 
-  %h2 Edit Track
+  .row
+    .col-md-8.col-md-offset-1
+      %h2 Edit Track
 
-  = render 'form'
+      = render 'form'
 
-  %p
+      %p
 
-  = link_to 'Remove Track', @music, method: :delete, confirm: "Are you sure you'd like to remove #{@music.title}? There's no undo!"
+      = link_to 'Remove Track', @music, method: :delete, confirm: "Are you sure you'd like to remove #{@music.title}? There's no undo!"
